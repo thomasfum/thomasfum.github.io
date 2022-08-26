@@ -79,6 +79,17 @@ html {
 	height: inherit
 }
 
+
+.BG {
+	background-color: rgba(55, 55, 55, .75);
+}
+
+.BGT {
+	background-color: rgba(55, 55, 55, .75);
+	margin: 0 10em;
+	
+}
+
 .CV_Table {
 	width: 100%;
 	border-spacing: 0;
