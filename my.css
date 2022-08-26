@@ -1,0 +1,276 @@
+@import url(http://fonts.googleapis.com/css?family=Flamenco);
+
+a,
+a:focus,
+a:hover,
+body,
+html {
+	color: #fff
+}
+
+.TopBar,
+.footer {
+	position: absolute
+}
+
+.CV_col2,
+.CV_col2_center {
+	font-size: 14px
+}
+
+@font-face {
+	font-family: BebasNeueRegular;
+	src: url(fonts/BebasNeue-webfont.eot);
+	src: url(fonts/BebasNeue-webfont.eot?#iefix) format('embedded-opentype'), url(fonts/BebasNeue-webfont.woff) format('woff'), url(fonts/BebasNeue-webfont.ttf) format('truetype'), url(fonts/BebasNeue-webfont.svg#BebasNeueRegular) format('svg');
+	font-weight: 400;
+	font-style: normal
+}
+
+body,
+html {
+	height: 100%;
+	background: url(back.jpg) center no-repeat fixed;
+	margin: 0;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+	box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+.cover-heading,
+.cover-subheading {
+	text-shadow: 3px 3px 8px #000;
+	color: #fff;
+	font-weight: 700
+}
+
+.TopBar {
+	height: 30px;
+	width: 100%
+}
+
+.footer {
+	height: 80px;
+	bottom: 0
+}
+
+.site-wrapper {
+	background: url(pattern.png) top left;
+	width: 100%;
+	height: 100%
+}
+
+.site-wrapper-inner {
+	vertical-align: top;
+	margin: 30px;
+	position: absolute;
+	height: 100%;
+	width: 100%
+}
+
+.CV {
+	background-color: rgba(55, 55, 55, .75);
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: inherit
+}
+
+.CV_Table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: separate
+}
+
+.CV_col2 {
+	text-align: left
+}
+
+.CV_col2_18,
+.CV_col2_20,
+.CV_col2_30,
+.CV_col2_center,
+.masthead-nav-new>li,
+.mySlide .slides {
+	text-align: center
+}
+
+.CV_col2_18 {
+	font-size: 18px
+}
+
+.CV_col2_20 {
+	font-size: 20px
+}
+
+.CV_col2_30 {
+	font-size: 30px
+}
+
+.CV_Table .CV_Bleu {
+	background-color: rgba(153, 204, 255, .75);
+	width: 166px
+}
+
+.cover-heading,
+.masthead-brand {
+	font-family: Flamenco;
+	font-size: 35px;
+	margin-top: 6px;
+	margin-bottom: 10px
+}
+
+.cover-heading {
+	font-size: 55px
+}
+
+.cover-subheading {
+	font-family: Flamenco;
+	font-size: 35px
+}
+
+.masthead-brand {
+	float: left
+}
+
+.masthead-nav-new {
+	float: right;
+	margin-right: 100px
+}
+
+.masthead-nav-new>li {
+	display: inline-block
+}
+
+.masthead-nav-new>li>a {
+	font-size: 16px;
+	font-weight: 700;
+	color: #fff;
+	color: rgba(255, 255, 255, 1);
+	letter-spacing: .5px;
+	text-align: center;
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 38em;
+	bottom: 0;
+	display: inline-block;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: .4em 0;
+	text-decoration: none;
+	outline: 0;
+	-webkit-transition: width .3s, right .3s;
+	-moz-transition: width .3s, right .3s;
+	-o-transition: width .3s, right .3s;
+	transition: width .3s, right .3s
+}
+
+.masthead-nav-new>li:last-child a::after {
+	content: "";
+	position: absolute;
+	right: inherit;
+	bottom: -3px;
+	width: inherit;
+	height: 3px;
+	background: #fff;
+	pointer-events: none;
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	transition: all .5s ease
+}
+
+.masthead-nav-new>li:nth-child(1) a,
+.masthead-nav-new>li:nth-child(2) a {
+	width: 7em
+}
+
+.masthead-nav-new>li:nth-child(3) a {
+	width: 9em
+}
+
+.masthead-nav-new>li:nth-child(4) a {
+	width: 7em
+}
+
+.masthead-nav-new>li:nth-child(5) a {
+	width: 10em
+}
+
+.masthead-nav-new>li:nth-child(6) a {
+	width: 7em
+}
+
+.masthead-nav-new>li:nth-child(1)~li:last-child a {
+	right: 41em;
+	width: 0
+}
+
+.masthead-nav-new>li:nth-child(2):hover~li:last-child a {
+	right: 33em;
+	width: 7em
+}
+
+.masthead-nav-new>li:nth-child(3):hover~li:last-child a {
+	right: 23.9em;
+	width: 9em
+}
+
+.masthead-nav-new>li:nth-child(4):hover~li:last-child a {
+	right: 16.5em;
+	width: 7em
+}
+
+.masthead-nav-new>li:nth-child(5):hover~li:last-child a {
+	right: 6.2em;
+	width: 10em
+}
+
+.masthead-nav-new>li:nth-child(6):last-child:hover a {
+	right: 0;
+	width: 6em
+}
+
+.masthead-nav-new>li:hover~li:last-child a::after,
+.masthead-nav-new>li:last-child:hover a::after {
+	background: #fff;
+	text-decoration: none
+}
+
+.masthead-nav-new>li:last-child a {
+	min-width: 6em;
+	max-width: 6em
+}
+
+.masthead-nav-new>li a:focus,
+.masthead-nav-new>li a:hover {
+	-webkit-transition: width .3s, right .3s, background-color .3s;
+	-moz-transition: width .3s, right .3s, background-color .3s;
+	-o-transition: width .3s, right .3s, background-color .3s;
+	transition: width .3s, right .3s, background-color .3s
+}
+
+b,
+strong {
+	font-weight: 700
+}
+
+.mySlide section {
+	display: block
+}
+
+.mySlide {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	-ms-touch-action: none;
+	touch-action: none
+}
+
+.mySlide .slides {
+	position: absolute; //width:100%;top:90px;bottom:40px;right:0;left:0;margin:auto auto 60px;overflow:visible;//position:absolute;width:960px;z-index:1;-webkit-perspective:600px;perspective:600px;-webkit-perspective-origin:60% 40%;perspective-origin:60% 40%}.mySlide .slides>section{-ms-perspective:600px;display:none;position:absolute;width:100%;padding:20px 0;z-index:10;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transition:-webkit-transform-origin .8s cubic-bezier(.26,.86,.44,.985),-webkit-transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985);transition:transform-origin .8s cubic-bezier(.26,.86,.44,.985),transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985)}.mySlide.center,.mySlide.center .slides,.mySlide.center .slides section{min-height:0}.mySlide .slides>section.future,.mySlide .slides>section.past{opacity:0;pointer-events:none}.mySlide .slides>section[data-transition=convex].past{-webkit-transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0);transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.mySlide .slides>section[data-transition=convex].future{-webkit-transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0);transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}
