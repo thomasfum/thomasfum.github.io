@@ -832,6 +832,7 @@ function selectMenu(id)
 		mySlide.initialize({
 		transition: 'convex',
 		});
+		//-- Init
 		var currntID=1;
 		var nbID=1;
 		var hash = window.location.hash;
@@ -853,6 +854,7 @@ function selectMenu(id)
 			else
 				selectMenu('Menu_sec1');
 		
+		//-- keyboard
 		document.addEventListener('keydown', function(event) {
 			if(event.keyCode == 37) {
 				//console.log('Left was pressed');
@@ -874,9 +876,17 @@ function selectMenu(id)
 				selectMenu('Menu_sec'+currntID);
 			}
 		});
+		//-- touch
+		 var touchsurface = document.getElementById('touchsurface'),
+        startX,
+        startY,
+        dist,
+        threshold = 150, //required min distance traveled to be considered swipe
+        allowedTime = 200, // maximum time allowed to travel that distance
+        elapsedTime,
+        startTime
 		
-		
-		document.addEventListener('touchstart', function(e){
+		touchsurface.addEventListener('touchstart', function(e){
 			var touchobj = e.changedTouches[0]
 			//console.log(touchobj);
 			dist = 0
@@ -886,11 +896,11 @@ function selectMenu(id)
 			e.preventDefault()
 		}, false);
  
-		document.addEventListener('touchmove', function(e){
+		touchsurface.addEventListener('touchmove', function(e){
 			e.preventDefault() // prevent scrolling when inside DIV
 		}, false)
  
-		document.addEventListener('touchend', function(e){
+		touchsurface.addEventListener('touchend', function(e){
 			var touchobj = e.changedTouches[0]
 			dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
 			elapsedTime = new Date().getTime() - startTime // get time elapsed
@@ -925,7 +935,7 @@ function selectMenu(id)
 			}
 			e.preventDefault()
 		}, false)
-		
+		//-- click
 		var a = document.getElementById('Menu').getElementsByTagName('li');
 		nbID=a.length-1;
 		//console.log('id='+currntID+"/"+nbID);
