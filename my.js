@@ -1,2 +1,861 @@
-/*! test1 2016-07-03 */
-!function(a,b){"function"==typeof define&&define.amd?define(function(){return a.mySlide=b(),a.mySlide}):"object"==typeof exports?module.exports=b():a.mySlide=b()}(this,function(){"use strict";function a(a){if(b(),F.transforms2d||F.transforms3d)E.wrapper=document.querySelector(".mySlide"),E.slides=document.querySelector(".mySlide .slides"),window.addEventListener("load",k,!1),h(C,a),c();else{document.body.setAttribute("class","no-transforms");for(var d=i(document.getElementsByTagName("img")),e=i(document.getElementsByTagName("iframe")),f=d.concat(e),g=0,j=f.length;j>g;g++){var l=f[g];l.getAttribute("data-src")&&(l.setAttribute("src",l.getAttribute("data-src")),l.removeAttribute("data-src"))}}}function b(){var a=document.createElement("div");F.transforms3d="WebkitPerspective"in a.style||"MozPerspective"in a.style||"msPerspective"in a.style||"OPerspective"in a.style||"perspective"in a.style,F.transforms2d="WebkitTransform"in a.style||"MozTransform"in a.style||"msTransform"in a.style||"OTransform"in a.style||"transform"in a.style}function c(){function a(){e.length&&head.js.apply(null,e),d()}function b(b){head.ready(b.src.match(/([\w\d_\-]*)\.?js$|[^\\\/]*$/i)[0],function(){"function"==typeof b.callback&&b.callback.apply(this),0===--f&&a()})}for(var c=[],e=[],f=0,g=0,h=C.dependencies.length;h>g;g++){var i=C.dependencies[g];i.condition&&!i.condition()||(i.async?e.push(i.src):c.push(i.src),b(i))}c.length?(f=c.length,head.js.apply(null,c)):a()}function d(){E.slides.classList.add("no-transition"),E.wrapper.setAttribute("role","application"),e(),q(),setTimeout(function(){E.slides.classList.remove("no-transition"),j("ready",{indexh:w,currentSlide:y})},1)}function e(a){E.wrapper.querySelectorAll(A).length;E.wrapper.classList.remove(C.transition),"object"==typeof a&&h(C,a),F.transforms3d===!1&&(C.transition="linear"),E.wrapper.classList.add(C.transition),E.wrapper.setAttribute("data-transition-speed","default"),E.wrapper.classList.add("center"),m()}function f(){window.addEventListener("hashchange",s,!1),window.addEventListener("resize",t,!1);var a;"hidden"in document?a="visibilitychange":"msHidden"in document?a="msvisibilitychange":"webkitHidden"in document&&(a="webkitvisibilitychange"),a&&document.addEventListener(a,u,!1)}function g(){window.removeEventListener("hashchange",s,!1),window.removeEventListener("resize",t,!1)}function h(a,b){for(var c in b)a[c]=b[c]}function i(a){return Array.prototype.slice.call(a)}function j(a,b){var c=document.createEvent("HTMLEvents",1,2);c.initEvent(a,!0,!0),h(c,b),E.wrapper.dispatchEvent(c)}function k(){if(E.wrapper)for(var a=i(E.wrapper.querySelectorAll(A)),b=0,c=a.length;c>b;b++){var d=a[b];"none"!==d.style.display&&(d.style.height="100%")}}function l(a){x=y;var b=E.wrapper.querySelectorAll(B),c=D.concat();D.length=0;var d=w||0;w=n(B,void 0===a?w:a),o(),k();a:for(var e=0,f=D.length;f>e;e++){for(var g=0;g<c.length;g++)if(c[g]===D[e]){c.splice(g,1);continue a}document.documentElement.classList.add(D[e]),j(D[e])}for(;c.length;)document.documentElement.classList.remove(c.pop());var h=b[w];y=h;var i=w!==d;i?j("slidechanged",{indexh:w,previousSlide:x,currentSlide:y}):x=null,x&&(x.classList.remove("present"),x.setAttribute("aria-hidden","true"))}function m(){g(),f(),k(),o()}function n(a,b){var c=i(E.wrapper.querySelectorAll(a)),d=c.length;if(d){b=Math.max(Math.min(b,d-1),0);for(var e=0;d>e;e++){var f=c[e];f.classList.remove("past"),f.classList.remove("present"),f.classList.remove("future"),f.setAttribute("hidden",""),f.setAttribute("aria-hidden","true"),f.querySelector("section")&&f.classList.add("stack"),b>e?f.classList.add("future"):e>b&&f.classList.add("past")}c[b].classList.add("present"),c[b].removeAttribute("hidden"),c[b].removeAttribute("aria-hidden");var g=c[b].getAttribute("data-state");g&&(D=D.concat(g.split(" ")))}else b=0;return b}function o(){var a,b=i(E.wrapper.querySelectorAll(B)),c=b.length;if(c&&"undefined"!=typeof w)for(var d=C.viewDistance,e=0;c>e;e++){var f=b[e];a=Math.abs((w||0)-e)||0,d>a?f.style.display="block":f.style.display="none"}}function p(){var a=E.wrapper.querySelectorAll(B),b={left:w>0,right:w<a.length-1};return b}function q(){var a=window.location.hash,b=a.slice(2).split("/"),c=a.replace(/#|\//gi,"");if(isNaN(parseInt(b[0],10))&&c.length){var d;if(/^[a-zA-Z][\w:.-]*$/.test(c)&&(d=document.getElementById(c)),d){var e=v.getIndices(d);l(e.h)}else l(w||0)}else{var f=parseInt(b[0],10)||0;f!==w&&l(f)}}function r(a){var b=w;if(a){var c=i(E.wrapper.querySelectorAll(B));b=Math.max(c.indexOf(a),0)}return{h:b}}function s(a){q()}function t(a){k()}function u(a){var b=document.webkitHidden||document.msHidden||document.hidden;b===!1&&document.activeElement!==document.body&&("function"==typeof document.activeElement.blur&&document.activeElement.blur(),document.body.focus())}var v,w,x,y,z="3.3.0",A=".slides section",B=".slides>section",C=(navigator.userAgent,{transition:"convex",viewDistance:5,dependencies:[]}),D=[],E={},F={};return v={VERSION:z,initialize:a,configure:e,sync:m,slide:l,layout:k,availableRoutes:p,addEventListeners:f,removeEventListeners:g,getIndices:r,addEventListener:function(a,b,c){"addEventListener"in window&&(E.wrapper||document.querySelector(".mySlide")).addEventListener(a,b,c)},removeEventListener:function(a,b,c){"addEventListener"in window&&(E.wrapper||document.querySelector(".mySlide")).removeEventListener(a,b,c)}}}),mySlide.initialize({transition:"convex"});var hash=window.location.hash,bits=hash.slice(2).split("/"),name=hash.replace(/#|\//gi,"");if(name.length){var element;/^[a-zA-Z][\w:.-]*$/.test(name)&&(element=document.getElementById(name),document.getElementById("Menu_"+name).style.backgroundColor="rgba(255,255,255,0.2)")}for(var a=document.getElementById("Menu").getElementsByTagName("li"),i=0;i<a.length;i++)a[i].onclick=function(){document.getElementById("Menu_sec1").style.backgroundColor="rgba(255,255,255,0)",document.getElementById("Menu_sec2").style.backgroundColor="rgba(255,255,255,0)",document.getElementById("Menu_sec3").style.backgroundColor="rgba(255,255,255,0)",document.getElementById("Menu_sec4").style.backgroundColor="rgba(255,255,255,0)",document.getElementById("Menu_sec5").style.backgroundColor="rgba(255,255,255,0)",document.getElementById(this.id).style.backgroundColor="rgba(255,255,255,0.2)"};
+/*!
+ * mySlide.js
+ * http://lab.hakim.se/mySlide-js
+ * MIT licensed
+ *
+ * Copyright (C) 2016 Hakim El Hattab, http://hakim.se
+ */
+ 
+ 
+ 
+ 
+(function( root, factory ) {
+	if( typeof define === 'function' && define.amd ) {
+		// AMD. Register as an anonymous module.
+		define( function() {
+			root.mySlide = factory();
+			return root.mySlide;
+		} );
+	} else if( typeof exports === 'object' ) {
+		// Node. Does not work with strict CommonJS.
+		module.exports = factory();
+	} else {
+		// Browser globals.
+		root.mySlide = factory();
+	}
+}( this, function() {
+
+	'use strict';
+
+	var mySlide;
+
+	// The mySlide.js version
+	var VERSION = '3.3.0';
+
+	var SLIDES_SELECTOR = '.slides section',
+		HORIZONTAL_SLIDES_SELECTOR = '.slides>section',
+		HOME_SLIDE_SELECTOR = '.slides>section:first-of-type',
+		UA = navigator.userAgent,
+
+		// Configuration defaults, can be overridden at initialization time
+		config = {
+
+		
+			// Transition style
+			transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+
+			// Number of slides away from the current that are visible
+			viewDistance: 5,
+
+			// Script dependencies to load
+			dependencies: []
+
+		},
+
+
+		// The horizontal and vertical index of the currently active slide
+		indexh,
+	
+		// The previous and current slide HTML elements
+		previousSlide,
+		currentSlide,
+
+		// Slides may hold a data-state attribute which we pick up and apply
+		// as a class to the body. This list contains the combined state of
+		// all current slides.
+		state = [],
+
+		
+
+		// Cached references to DOM elements
+		dom = {},
+
+		// Features supported by the browser, see #checkCapabilities()
+		features = {}
+		
+
+	/**
+	 * Starts up the presentation if the client is capable.
+	 */
+	function initialize( options ) {
+
+		checkCapabilities();
+
+		if( !features.transforms2d && !features.transforms3d ) {
+			document.body.setAttribute( 'class', 'no-transforms' );
+
+			// Since JS won't be running any further, we load all lazy
+			// loading elements upfront
+			var images = toArray( document.getElementsByTagName( 'img' ) ),
+				iframes = toArray( document.getElementsByTagName( 'iframe' ) );
+
+			var lazyLoadable = images.concat( iframes );
+
+			for( var i = 0, len = lazyLoadable.length; i < len; i++ ) {
+				var element = lazyLoadable[i];
+				if( element.getAttribute( 'data-src' ) ) {
+					element.setAttribute( 'src', element.getAttribute( 'data-src' ) );
+					element.removeAttribute( 'data-src' );
+				}
+			}
+
+			// If the browser doesn't support core features we won't be
+			// using JavaScript to control the presentation
+			return;
+		}
+
+		// Cache references to key DOM elements
+		dom.wrapper = document.querySelector( '.mySlide' );
+		dom.slides = document.querySelector( '.mySlide .slides' );
+
+		// Force a layout when the whole page, incl fonts, has loaded
+		window.addEventListener( 'load', layout, false );
+
+		// Copy options over to our config object
+		extend( config, options );
+
+		// Loads the dependencies and continues to #start() once done
+		load();
+
+	}
+
+	/**
+	 * Inspect the client to see what it's capable of, this
+	 * should only happens once per runtime.
+	 */
+	function checkCapabilities() {
+
+		var testElement = document.createElement( 'div' );
+
+		features.transforms3d = 'WebkitPerspective' in testElement.style ||
+								'MozPerspective' in testElement.style ||
+								'msPerspective' in testElement.style ||
+								'OPerspective' in testElement.style ||
+								'perspective' in testElement.style;
+
+		features.transforms2d = 'WebkitTransform' in testElement.style ||
+								'MozTransform' in testElement.style ||
+								'msTransform' in testElement.style ||
+								'OTransform' in testElement.style ||
+								'transform' in testElement.style;
+
+	}
+
+    /**
+     * Loads the dependencies of mySlide.js. Dependencies are
+     * defined via the configuration option 'dependencies'
+     * and will be loaded prior to starting/binding mySlide.js.
+     * Some dependencies may have an 'async' flag, if so they
+     * will load after mySlide.js has been started up.
+     */
+	function load() {
+
+		var scripts = [],
+			scriptsAsync = [],
+			scriptsToPreload = 0;
+
+		// Called once synchronous scripts finish loading
+		function proceed() {
+			if( scriptsAsync.length ) {
+				// Load asynchronous scripts
+				head.js.apply( null, scriptsAsync );
+			}
+
+			start();
+		}
+
+		function loadScript( s ) {
+			head.ready( s.src.match( /([\w\d_\-]*)\.?js$|[^\\\/]*$/i )[0], function() {
+				// Extension may contain callback functions
+				if( typeof s.callback === 'function' ) {
+					s.callback.apply( this );
+				}
+
+				if( --scriptsToPreload === 0 ) {
+					proceed();
+				}
+			});
+		}
+
+		for( var i = 0, len = config.dependencies.length; i < len; i++ ) {
+			var s = config.dependencies[i];
+
+			// Load if there's no condition or the condition is truthy
+			if( !s.condition || s.condition() ) {
+				if( s.async ) {
+					scriptsAsync.push( s.src );
+				}
+				else {
+					scripts.push( s.src );
+				}
+
+				loadScript( s );
+			}
+		}
+
+		if( scripts.length ) {
+			scriptsToPreload = scripts.length;
+
+			// Load synchronous scripts
+			head.js.apply( null, scripts );
+		}
+		else {
+			proceed();
+		}
+
+	}
+
+	/**
+	 * Starts up mySlide.js by binding input events and navigating
+	 * to the current URL deeplink if there is one.
+	 */
+	function start() {
+
+		// Make sure we've got all the DOM elements we need
+		// Prevent transitions while we're loading
+		dom.slides.classList.add( 'no-transition' );
+		dom.wrapper.setAttribute( 'role', 'application' );
+
+		
+		// Updates the presentation to match the current configuration values
+		configure();
+
+		// Read the initial hash
+		readURL();
+
+		// Notify listeners that the presentation is ready but use a 1ms
+		// timeout to ensure it's not fired synchronously after #initialize()
+		setTimeout( function() {
+			// Enable transitions now that we're loaded
+			dom.slides.classList.remove( 'no-transition' );
+
+			dispatchEvent( 'ready', {
+				'indexh': indexh,
+				'currentSlide': currentSlide
+			} );
+		}, 1 );
+
+	
+	}
+
+
+	/**
+	 * Creates an HTML element and returns a reference to it.
+	 * If the element already exists the existing instance will
+	 * be returned.
+	 */
+	function createSingletonNode( container, tagname, classname, innerHTML ) {
+
+		// Find all nodes matching the description
+		var nodes = container.querySelectorAll( '.' + classname );
+
+		// Check all matches to find one which is a direct child of
+		// the specified container
+		for( var i = 0; i < nodes.length; i++ ) {
+			var testNode = nodes[i];
+			if( testNode.parentNode === container ) {
+				return testNode;
+			}
+		}
+
+		// If no node was found, create it now
+		var node = document.createElement( tagname );
+		node.classList.add( classname );
+		if( typeof innerHTML === 'string' ) {
+			node.innerHTML = innerHTML;
+		}
+		container.appendChild( node );
+
+		return node;
+
+	}
+
+
+
+	/**
+	 * Applies the configuration settings from the config
+	 * object. May be called multiple times.
+	 */
+	function configure( options ) {
+
+		var numberOfSlides = dom.wrapper.querySelectorAll( SLIDES_SELECTOR ).length;
+
+		dom.wrapper.classList.remove( config.transition );
+
+		// New config options may be passed when this method
+		// is invoked through the API after initialization
+		if( typeof options === 'object' ) extend( config, options );
+
+		// Force linear transition based on browser capabilities
+		if( features.transforms3d === false ) config.transition = 'linear';
+
+		dom.wrapper.classList.add( config.transition );
+
+		dom.wrapper.setAttribute( 'data-transition-speed', 'default' );
+	
+		dom.wrapper.classList.add( 'center' );
+	
+
+		sync();
+
+	}
+
+	/**
+	 * Binds all event listeners.
+	 */
+	function addEventListeners() {
+
+		window.addEventListener( 'hashchange', onWindowHashChange, false );
+		window.addEventListener( 'resize', onWindowResize, false );
+		var visibilityChange;
+
+		if( 'hidden' in document ) {
+			visibilityChange = 'visibilitychange';
+		}
+		else if( 'msHidden' in document ) {
+			visibilityChange = 'msvisibilitychange';
+		}
+		else if( 'webkitHidden' in document ) {
+			visibilityChange = 'webkitvisibilitychange';
+		}
+
+		if( visibilityChange ) {
+			document.addEventListener( visibilityChange, onPageVisibilityChange, false );
+		}
+
+	}
+
+	/**
+	 * Unbinds all event listeners.
+	 */
+	function removeEventListeners() {
+		
+		window.removeEventListener( 'hashchange', onWindowHashChange, false );
+		window.removeEventListener( 'resize', onWindowResize, false );
+
+	}
+
+	/**
+	 * Extend object a with the properties of object b.
+	 * If there's a conflict, object b takes precedence.
+	 */
+	function extend( a, b ) {
+
+		for( var i in b ) {
+			a[ i ] = b[ i ];
+		}
+
+	}
+
+	/**
+	 * Converts the target object to an array.
+	 */
+	function toArray( o ) {
+
+		return Array.prototype.slice.call( o );
+
+	}
+
+	
+
+	/**
+	 * Measures the distance in pixels between point a
+	 * and point b.
+	 *
+	 * @param {Object} a point with x/y properties
+	 * @param {Object} b point with x/y properties
+	 */
+	function distanceBetween( a, b ) {
+
+		var dx = a.x - b.x,
+			dy = a.y - b.y;
+
+		return Math.sqrt( dx*dx + dy*dy );
+
+	}
+
+	/**
+	 * Dispatches an event of the specified type from the
+	 * mySlide DOM element.
+	 */
+	function dispatchEvent( type, args ) {
+
+		var event = document.createEvent( 'HTMLEvents', 1, 2 );
+		event.initEvent( type, true, true );
+		extend( event, args );
+		dom.wrapper.dispatchEvent( event );
+
+	
+
+	}
+
+
+
+	/**
+	 * Applies JavaScript-controlled layout rules to the
+	 * presentation.
+	 */
+	function layout() {
+
+		if( dom.wrapper ) {
+			// Select all slides, vertical and horizontal
+			var slides = toArray( dom.wrapper.querySelectorAll( SLIDES_SELECTOR ) );
+
+			for( var i = 0, len = slides.length; i < len; i++ ) {
+				var slide = slides[ i ];
+
+				// Don't bother updating invisible slides
+				if( slide.style.display === 'none' ) {
+					continue;
+				}
+				slide.style.height='100%';
+			}
+		}
+	}
+
+	/**
+	 * Steps from the current point in the presentation to the
+	 * slide which matches the specified horizontal and vertical
+	 * indices.
+	 *
+	 * @param {int} h Horizontal index of the target slide
+	
+	 */
+	function slide( h ) {
+
+		// Remember where we were at before
+		previousSlide = currentSlide;
+
+		// Query all horizontal slides in the deck
+		var horizontalSlides = dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR );
+
+			// Remember the state before this slide
+		var stateBefore = state.concat();
+
+		// Reset the state array
+		state.length = 0;
+
+		var indexhBefore = indexh || 0;
+
+		// Activate and transition to the new slide
+		indexh = updateSlides( HORIZONTAL_SLIDES_SELECTOR, h === undefined ? indexh : h );
+	
+		// Update the visibility of slides now that the indices have changed
+		updateSlidesVisibility();
+
+		layout();
+
+		// Apply the new state
+		stateLoop: for( var i = 0, len = state.length; i < len; i++ ) {
+			// Check if this state existed on the previous slide. If it
+			// did, we will avoid adding it repeatedly
+			for( var j = 0; j < stateBefore.length; j++ ) {
+				if( stateBefore[j] === state[i] ) {
+					stateBefore.splice( j, 1 );
+					continue stateLoop;
+				}
+			}
+
+			document.documentElement.classList.add( state[i] );
+
+			// Dispatch custom event matching the state's name
+			dispatchEvent( state[i] );
+		}
+
+		// Clean up the remains of the previous state
+		while( stateBefore.length ) {
+			document.documentElement.classList.remove( stateBefore.pop() );
+		}
+
+		// Find the current horizontal slide and any possible vertical slides
+		// within it
+		var currentHorizontalSlide = horizontalSlides[ indexh ]/*,currentVerticalSlides = currentHorizontalSlide.querySelectorAll( 'section' )*/;
+
+		// Store references to the previous and current slides
+		currentSlide = currentHorizontalSlide;
+
+		
+		// Dispatch an event if the slide changed
+		var slideChanged = ( indexh !== indexhBefore );
+		if( slideChanged ) {
+			dispatchEvent( 'slidechanged', {
+				'indexh': indexh,
+				'previousSlide': previousSlide,
+				'currentSlide': currentSlide,
+			} );
+		}
+		else {
+			// Ensure that the previous slide is never the same as the current
+			previousSlide = null;
+		}
+
+		// Solves an edge case where the previous slide maintains the
+		// 'present' class when navigating between adjacent vertical
+		// stacks
+		if( previousSlide ) {
+			previousSlide.classList.remove( 'present' );
+			previousSlide.setAttribute( 'aria-hidden', 'true' );
+		}
+
+
+
+	}
+
+	/**
+	 * Syncs the presentation with the current DOM. Useful
+	 * when new slides or control elements are added or when
+	 * the configuration has changed.
+	 */
+	function sync() {
+
+		// Subscribe to input
+		removeEventListeners();
+		addEventListeners();
+
+		// Force a layout to make sure the current config is accounted for
+		layout();
+	
+		updateSlidesVisibility();
+	}
+
+
+
+	/**
+	 * Updates one dimension of slides by showing the slide
+	 * with the specified index.
+	 *
+	 * @param {String} selector A CSS selector that will fetch
+	 * the group of slides we are working with
+	 * @param {Number} index The index of the slide that should be
+	 * shown
+	 *
+	 * @return {Number} The index of the slide that is now shown,
+	 * might differ from the passed in index if it was out of
+	 * bounds.
+	 */
+	function updateSlides( selector, index ) {
+
+		// Select all slides and convert the NodeList result to
+		// an array
+		var slides = toArray( dom.wrapper.querySelectorAll( selector ) ),
+			slidesLength = slides.length;
+
+		if( slidesLength ) {
+			// Enforce max and minimum index bounds
+			index = Math.max( Math.min( index, slidesLength - 1 ), 0 );
+
+			for( var i = 0; i < slidesLength; i++ ) {
+				var element = slides[i];
+
+				element.classList.remove( 'past' );
+				element.classList.remove( 'present' );
+				element.classList.remove( 'future' );
+
+				// http://www.w3.org/html/wg/drafts/html/master/editing.html#the-hidden-attribute
+				element.setAttribute( 'hidden', '' );
+				element.setAttribute( 'aria-hidden', 'true' );
+
+				// If this element contains vertical slides
+				if( element.querySelector( 'section' ) ) {
+					element.classList.add( 'stack' );
+				}
+
+				if( i < index ) {
+					// Any element previous to index is given the 'past' class
+					element.classList.add(  'future'  );
+				}
+				else if( i > index ) {
+					// Any element subsequent to index is given the 'future' class
+					element.classList.add( 'past' );
+				}
+			}
+
+			// Mark the current slide as present
+			slides[index].classList.add( 'present' );
+			slides[index].removeAttribute( 'hidden' );
+			slides[index].removeAttribute( 'aria-hidden' );
+
+			// If this slide has a state associated with it, add it
+			// onto the current state of the deck
+			var slideState = slides[index].getAttribute( 'data-state' );
+			if( slideState ) {
+				state = state.concat( slideState.split( ' ' ) );
+			}
+
+		}
+		else {
+			// Since there are no slides we can't be anywhere beyond the
+			// zeroth index
+			index = 0;
+		}
+
+		return index;
+
+	}
+
+	/**
+	 * Optimization method; hide all slides that are far away
+	 * from the present slide.
+	 */
+	function updateSlidesVisibility() {
+
+		// Select all slides and convert the NodeList result to
+		// an array
+		var horizontalSlides = toArray( dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ) ),
+			horizontalSlidesLength = horizontalSlides.length,
+			distanceX,
+			distanceY;
+
+		if( horizontalSlidesLength && typeof indexh !== 'undefined' ) {
+
+			// The number of steps away from the present slide that will
+			// be visible
+			var viewDistance = config.viewDistance;
+			for( var x = 0; x < horizontalSlidesLength; x++ ) {
+				var horizontalSlide = horizontalSlides[x];
+				// Determine how far away this slide is from the present
+				distanceX = Math.abs( ( indexh || 0 ) - x ) || 0;
+
+				// Show the horizontal slide if it's within the view distance
+				if( distanceX < viewDistance ) {
+					horizontalSlide.style.display = 'block';
+				}
+				else {
+				
+					horizontalSlide.style.display = 'none';
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
+	/**
+	 * Determine what available routes there are for navigation.
+	 *
+	 * @return {Object} containing four booleans: left/right/up/down
+	 */
+	function availableRoutes() {
+
+		var horizontalSlides = dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR );
+	
+		var routes = {
+			left: indexh > 0 ,
+			right: indexh < horizontalSlides.length - 1 
+		};
+		return routes;
+
+	}
+
+
+	/**
+	 * Reads the current URL (hash) and navigates accordingly.
+	 */
+	function readURL() {
+
+		var hash = window.location.hash;
+
+		// Attempt to parse the hash as either an index or name
+		var bits = hash.slice( 2 ).split( '/' ),
+			name = hash.replace( /#|\//gi, '' );
+
+		// If the first bit is invalid and there is a name we can
+		// assume that this is a named link
+		if( isNaN( parseInt( bits[0], 10 ) ) && name.length ) {
+			var element;
+
+			// Ensure the named link is a valid HTML ID attribute
+			if( /^[a-zA-Z][\w:.-]*$/.test( name ) ) {
+				// Find the slide with the specified ID
+				element = document.getElementById( name );
+			}
+
+			if( element ) {
+				// Find the position of the named slide and navigate to it
+				var indices = mySlide.getIndices( element );
+				slide( indices.h );
+			}
+			// If the slide doesn't exist, navigate to the current slide
+			else {
+				slide( indexh || 0);
+			}
+		}
+		else {
+			// Read the index components of the hash
+			var h = parseInt( bits[0], 10 ) || 0;
+
+			if( h !== indexh ) {
+				slide( h );
+			}
+		}
+	}
+
+
+
+	/**
+	 * Retrieves the h/v location of the current, or specified,
+	 * slide.
+	 *
+	 * @param {HTMLElement} slide If specified, the returned
+	 * index will be for this slide rather than the currently
+	 * active one
+	 *
+	 * @return {Object} { h: <int>, v: <int>, f: <int> }
+	 */
+	function getIndices( slide ) {
+
+		// By default, return the current indices
+		var h = indexh;
+
+		// If a slide is specified, return the indices of that slide
+		if( slide ) {
+			
+			// Select all horizontal slides
+			var horizontalSlides = toArray( dom.wrapper.querySelectorAll( HORIZONTAL_SLIDES_SELECTOR ) );
+
+			// Now that we know which the horizontal slide is, get its index
+			h = Math.max( horizontalSlides.indexOf( slide ), 0 );
+
+		}
+		return { h: h};
+	}
+
+	
+	/**
+	 * Handler for the window level 'hashchange' event.
+	 */
+	function onWindowHashChange( event ) {
+
+		readURL();
+
+	}
+
+	/**
+	 * Handler for the window level 'resize' event.
+	 */
+	function onWindowResize( event ) {
+
+		layout();
+
+	}
+
+	/**
+	 * Handle for the window level 'visibilitychange' event.
+	 */
+	function onPageVisibilityChange( event ) {
+
+		var isHidden =  document.webkitHidden ||
+						document.msHidden ||
+						document.hidden;
+
+		// If, after clicking a link or similar and we're coming back,
+		// focus the document.body to ensure we can use keyboard shortcuts
+		if( isHidden === false && document.activeElement !== document.body ) {
+			// Not all elements support .blur() - SVGs among them.
+			if( typeof document.activeElement.blur === 'function' ) {
+				document.activeElement.blur();
+			}
+			document.body.focus();
+		}
+
+	}
+
+
+	// --------------------------------------------------------------------//
+	// ------------------------------- API --------------------------------//
+	// --------------------------------------------------------------------//
+
+
+	mySlide = {
+		VERSION: VERSION,
+
+		initialize: initialize,
+		configure: configure,
+		//readURLAndGetIndex:readURLAndGetIndex,
+		sync: sync,
+
+		// Navigation methods
+		slide: slide,
+		
+		// Forces an update in slide layout
+		layout: layout,
+
+		// Returns an object with the available routes as booleans (left/right/top/bottom)
+		availableRoutes: availableRoutes,
+
+		// Adds or removes all internal event listeners (such as keyboard)
+		addEventListeners: addEventListeners,
+		removeEventListeners: removeEventListeners,
+
+		// Returns the indices of the current, or specified, slide
+		getIndices: getIndices,
+
+		// Forward event binding to the mySlide DOM element
+		addEventListener: function( type, listener, useCapture ) {
+			if( 'addEventListener' in window ) {
+				( dom.wrapper || document.querySelector( '.mySlide' ) ).addEventListener( type, listener, useCapture );
+			}
+		},
+		removeEventListener: function( type, listener, useCapture ) {
+			if( 'addEventListener' in window ) {
+				( dom.wrapper || document.querySelector( '.mySlide' ) ).removeEventListener( type, listener, useCapture );
+			}
+		}
+
+	
+	};
+
+	return mySlide;
+
+}));
+//------------------------------------------------------//
+
+ // Required, even if empty.
+		mySlide.initialize({
+		transition: 'convex',
+		});
+		var hash = window.location.hash;
+			var bits = hash.slice( 2 ).split( '/' );
+			var name = hash.replace( /#|\//gi, '' );
+			//console.log(name);
+			if( name.length ) {
+			var element;
+
+			// Ensure the named link is a valid HTML ID attribute
+			if( /^[a-zA-Z][\w:.-]*$/.test( name ) ) {
+				// Find the slide with the specified ID
+				element = document.getElementById( name );
+				//element.style(element  border-bottom:3px solid #ffffff;
+				/*
+				console.log(document.getElementById("Menu_"+name+"_link").style.borderBottom);
+				document.getElementById("Menu_"+name+"_link").style.borderBottom="3px solid #ffffff";
+				console.log(document.getElementById("Menu_"+name+"_link").style.borderBottom);
+				*/
+					document.getElementById("Menu_"+name).style.backgroundColor="rgba(255,255,255,0.2)";
+			}
+		}
+
+		var a = document.getElementById('Menu').getElementsByTagName('li');
+		for(var i = 0; i < a.length; i++){
+			  a[i].onclick = function(){
+			  /*
+				document.getElementById("Menu_sec1_link").style.borderBottom="0px solid #ffffff";
+				document.getElementById("Menu_sec2_link").style.borderBottom="0px solid #ffffff";
+				document.getElementById("Menu_sec3_link").style.borderBottom="0px solid #ffffff";
+				document.getElementById("Menu_sec4_link").style.borderBottom="0px solid #ffffff";
+				document.getElementById("Menu_sec5_link").style.borderBottom="0px solid #ffffff";
+				document.getElementById(this.id+"_link").style.borderBottom="3px solid #ffffff";
+				*/
+				document.getElementById("Menu_sec1").style.backgroundColor="rgba(255,255,255,0)";
+				document.getElementById("Menu_sec2").style.backgroundColor="rgba(255,255,255,0)";
+				document.getElementById("Menu_sec3").style.backgroundColor="rgba(255,255,255,0)";
+				document.getElementById("Menu_sec4").style.backgroundColor="rgba(255,255,255,0)";
+				document.getElementById("Menu_sec5").style.backgroundColor="rgba(255,255,255,0)";
+				document.getElementById(this.id).style.backgroundColor="rgba(255,255,255,0.2)";
+		}
+	}
