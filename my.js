@@ -815,47 +815,122 @@
 }));
 //------------------------------------------------------//
 
+//id is Menu_sec2
+function selectMenu(id)
+{
+		//console.log('var id='+id);
+		var a = document.getElementById('Menu').getElementsByTagName('li');
+		for(var j = 0; j < a.length-1; j++){
+			var t="Menu_sec"+(j+1);
+			document.getElementById(t).style.backgroundColor="rgba(255,255,255,0)";
+		}
+		document.getElementById(id).style.backgroundColor="rgba(255,255,255,0.2)";
+		currntID=id.substring(8);
+		//console.log('id='+currntID+"/"+nbID);
+}				
  // Required, even if empty.
 		mySlide.initialize({
 		transition: 'convex',
 		});
+		var currntID=1;
+		var nbID=1;
 		var hash = window.location.hash;
 			var bits = hash.slice( 2 ).split( '/' );
 			var name = hash.replace( /#|\//gi, '' );
 			//console.log(name);
-			if( name.length ) {
-			var element;
+			if( name.length ) 
+			{
+				var element;
+				
 
-			// Ensure the named link is a valid HTML ID attribute
-			if( /^[a-zA-Z][\w:.-]*$/.test( name ) ) {
-				// Find the slide with the specified ID
-				element = document.getElementById( name );
-				//element.style(element  border-bottom:3px solid #ffffff;
-				/*
-				console.log(document.getElementById("Menu_"+name+"_link").style.borderBottom);
-				document.getElementById("Menu_"+name+"_link").style.borderBottom="3px solid #ffffff";
-				console.log(document.getElementById("Menu_"+name+"_link").style.borderBottom);
-				*/
-					document.getElementById("Menu_"+name).style.backgroundColor="rgba(255,255,255,0.2)";
+				// Ensure the named link is a valid HTML ID attribute
+				if( /^[a-zA-Z][\w:.-]*$/.test( name ) ) {
+					// Find the slide with the specified ID
+					//console.log("--->Menu_"+name);
+					selectMenu('Menu_'+name)
+				}
 			}
-		}
-
+			else
+				selectMenu('Menu_sec1');
+		
+		document.addEventListener('keydown', function(event) {
+			if(event.keyCode == 37) {
+				//console.log('Left was pressed');
+				currntID--;
+				if(currntID<1)
+					currntID=nbID;
+				//console.log('id='+currntID+"/"+nbID);
+				window.location.href ="#/sec"+currntID;
+				selectMenu('Menu_sec'+currntID);
+				
+			}
+			else if(event.keyCode == 39) {
+				//console.log('Right was pressed');
+				currntID++;
+				if(currntID>nbID)
+					currntID=1;
+				//console.log('id='+currntID+"/"+nbID);
+				window.location.href ="#/sec"+currntID;
+				selectMenu('Menu_sec'+currntID);
+			}
+		});
+		
+		
+		document.addEventListener('touchstart', function(e){
+			var touchobj = e.changedTouches[0]
+			//console.log(touchobj);
+			dist = 0
+			startX = touchobj.pageX
+			startY = touchobj.pageY
+			startTime = new Date().getTime() // record time when finger first makes contact with surface
+			e.preventDefault()
+		}, false);
+ 
+		document.addEventListener('touchmove', function(e){
+			e.preventDefault() // prevent scrolling when inside DIV
+		}, false)
+ 
+		document.addEventListener('touchend', function(e){
+			var touchobj = e.changedTouches[0]
+			dist = touchobj.pageX - startX // get total dist traveled by finger while in contact with surface
+			elapsedTime = new Date().getTime() - startTime // get time elapsed
+			// check that elapsed time is within specified, horizontal dist traveled >= threshold, and vertical dist traveled <= 100
+			//console.log("dist="+dist +" "+elapsedTime);
+			var allowedTime=200;
+			var threshold=100;
+			var swiperightBol = (elapsedTime <= allowedTime && Math.abs(dist) >= threshold && Math.abs(touchobj.pageY - startY) <= 100)
+			if(swiperightBol)
+			{
+				//console.log("swip");
+				if(dist<0)
+				{
+					//console.log('Swift Left');
+					currntID--;
+					if(currntID<1)
+						currntID=nbID;
+					//console.log('id='+currntID+"/"+nbID);
+					window.location.href ="#/sec"+currntID;
+					selectMenu('Menu_sec'+currntID);
+				}
+				if(dist>0)
+				{
+					//console.log('swift Right');
+					currntID++;
+					if(currntID>nbID)
+						currntID=1;
+					//console.log('id='+currntID+"/"+nbID);
+					window.location.href ="#/sec"+currntID;
+					selectMenu('Menu_sec'+currntID);
+				}
+			}
+			e.preventDefault()
+		}, false)
+		
 		var a = document.getElementById('Menu').getElementsByTagName('li');
+		nbID=a.length-1;
+		//console.log('id='+currntID+"/"+nbID);
 		for(var i = 0; i < a.length; i++){
 			  a[i].onclick = function(){
-			  /*
-				document.getElementById("Menu_sec1_link").style.borderBottom="0px solid #ffffff";
-				document.getElementById("Menu_sec2_link").style.borderBottom="0px solid #ffffff";
-				document.getElementById("Menu_sec3_link").style.borderBottom="0px solid #ffffff";
-				document.getElementById("Menu_sec4_link").style.borderBottom="0px solid #ffffff";
-				document.getElementById("Menu_sec5_link").style.borderBottom="0px solid #ffffff";
-				document.getElementById(this.id+"_link").style.borderBottom="3px solid #ffffff";
-				*/
-				document.getElementById("Menu_sec1").style.backgroundColor="rgba(255,255,255,0)";
-				document.getElementById("Menu_sec2").style.backgroundColor="rgba(255,255,255,0)";
-				document.getElementById("Menu_sec3").style.backgroundColor="rgba(255,255,255,0)";
-				document.getElementById("Menu_sec4").style.backgroundColor="rgba(255,255,255,0)";
-				document.getElementById("Menu_sec5").style.backgroundColor="rgba(255,255,255,0)";
-				document.getElementById(this.id).style.backgroundColor="rgba(255,255,255,0.2)";
+				 selectMenu(this.id);
 		}
 	}
