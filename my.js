@@ -825,6 +825,7 @@ function selectMenu(id)
 			document.getElementById(t).style.backgroundColor="rgba(255,255,255,0)";
 		}
 		document.getElementById(id).style.backgroundColor="rgba(255,255,255,0.2)";
+		
 		currntID=id.substring(8);
 		//console.log('id='+currntID+"/"+nbID);
 }				
@@ -862,8 +863,11 @@ function selectMenu(id)
 				if(currntID<1)
 					currntID=nbID;
 				//console.log('id='+currntID+"/"+nbID);
-				window.location.href ="#/sec"+currntID;
-				selectMenu('Menu_sec'+currntID);
+				//window.location.href ="#/sec"+currntID;
+				//selectMenu('Menu_sec'+currntID);
+				document.getElementById('Menu_sec'+currntID+'_link').click();
+				document.getElementById('touchsurface').focus();
+				//document.getElementById('Menu_sec'+currntID+'_link').classList.add("masthead-nav-new");
 				
 			}
 			else if(event.keyCode == 39) {
@@ -872,8 +876,12 @@ function selectMenu(id)
 				if(currntID>nbID)
 					currntID=1;
 				//console.log('id='+currntID+"/"+nbID);
-				window.location.href ="#/sec"+currntID;
-				selectMenu('Menu_sec'+currntID);
+				//window.location.href ="#/sec"+currntID;
+				//selectMenu('Menu_sec'+currntID);
+				document.getElementById('Menu_sec'+currntID+'_link').click();
+				document.getElementById('touchsurface').focus();
+				//document.getElementById('Menu_sec'+currntID+'_link').classList.add("masthead-nav-new");
+				
 			}
 		});
 		//-- touch
@@ -893,11 +901,11 @@ function selectMenu(id)
 			startX = touchobj.pageX
 			startY = touchobj.pageY
 			startTime = new Date().getTime() // record time when finger first makes contact with surface
-			e.preventDefault()
+			//e.preventDefault()
 		}, false);
  
 		touchsurface.addEventListener('touchmove', function(e){
-			e.preventDefault() // prevent scrolling when inside DIV
+			//e.preventDefault() // prevent scrolling when inside DIV
 		}, false)
  
 		touchsurface.addEventListener('touchend', function(e){
@@ -933,7 +941,7 @@ function selectMenu(id)
 					selectMenu('Menu_sec'+currntID);
 				}
 			}
-			e.preventDefault()
+			//e.preventDefault()
 		}, false)
 		//-- click
 		var a = document.getElementById('Menu').getElementsByTagName('li');
