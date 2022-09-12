@@ -866,7 +866,7 @@ function selectMenu(id)
 				//window.location.href ="#/sec"+currntID;
 				//selectMenu('Menu_sec'+currntID);
 				document.getElementById('Menu_sec'+currntID+'_link').click();
-				document.getElementById('touchsurface').focus();
+				//document.getElementById('touchsurface').focus();
 				//document.getElementById('Menu_sec'+currntID+'_link').classList.add("masthead-nav-new");
 				
 			}
@@ -879,7 +879,7 @@ function selectMenu(id)
 				//window.location.href ="#/sec"+currntID;
 				//selectMenu('Menu_sec'+currntID);
 				document.getElementById('Menu_sec'+currntID+'_link').click();
-				document.getElementById('touchsurface').focus();
+				//document.getElementById('touchsurface').focus();
 				//document.getElementById('Menu_sec'+currntID+'_link').classList.add("masthead-nav-new");
 				
 			}
