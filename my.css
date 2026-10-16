@@ -91,9 +91,10 @@ html {
 }
 
 .BGT {
-	background-color: rgba(55, 55, 55, .75);
-	margin: 0 10em;
-	
+    background-color: rgba(55, 55, 55, .75);
+    margin: 0em 4em;
+    padding: 0 3em;
+
 }
 
 .CV_Table {
@@ -134,7 +135,6 @@ html {
 
 #projectTable {
 	border: 1px solid black;
-	/*background-color: #f0f0f0;*/
 }
 
 #projectTable tr {
@@ -151,9 +151,14 @@ html {
 	padding: 15px;
 }
 
+#projectTable td:nth-child(2) {
+	text-align: left;
+}
+
 .cover-heading,
 .masthead-brand {
-	font-family: Flamenco;
+	/* font-family: Flamenco;*/
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 35px;
 	margin-top: 6px;
 	margin-bottom: 10px
@@ -164,8 +169,10 @@ html {
 }
 
 .cover-subheading {
-	font-family: Flamenco;
-	font-size: 35px
+	/*font-family: Flamenco;*/
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 35px;
+	font-weight: 100;
 }
 
 .masthead-brand {
