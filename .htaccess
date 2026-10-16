@@ -1,0 +1,4 @@
+## Redirect 301 pour avoir une redirection permanente sur le site en HTTPS
+<If "%{HTTPS} != 'on'">
+Redirect 301 "/" "https://tfumey.pages-perso.free.fr/"
+</If>
