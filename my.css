@@ -329,7 +329,15 @@ html {
 
 	.masthead-nav-new>li>a {
 		font-size: 13px;
-		padding: .3em 0
+		padding: .3em 0;
+		transition: none !important;
+		-webkit-transition: none !important;
+		-moz-transition: none !important;
+		-o-transition: none !important
+	}
+
+	.masthead-nav-new>li:last-child a::after {
+		display: none
 	}
 
 	.site-wrapper-inner {
@@ -402,7 +410,16 @@ html {
 		position: static;
 		display: block;
 		width: 100% !important;
-		font-size: 14px
+		font-size: 14px;
+		right: auto !important;
+		transition: none !important;
+		-webkit-transition: none !important;
+		-moz-transition: none !important;
+		-o-transition: none !important
+	}
+
+	.masthead-nav-new>li:last-child a::after {
+		display: none
 	}
 
 	.masthead-nav-new>li:last-child a {
