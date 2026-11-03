@@ -8,8 +8,7 @@ html {
 	color: #fff
 }
 
-.TopBar,
-.footer {
+.TopBar {
 	position: absolute
 }
 
@@ -58,8 +57,13 @@ html {
 }
 
 .footer {
+	position: relative;
+	flex: 0 0 auto;
 	height: 30px;
-	bottom: 0
+	z-index: 20;
+	text-align: left;
+	padding-left: 10px;
+	box-sizing: border-box
 }
 
 .site-wrapper {
@@ -76,8 +80,9 @@ html {
 .site-wrapper-inner {
 	vertical-align: top;
 
-	position: absolute;
-	height: 100%;
+	position: relative;
+	flex: 1 1 auto;
+	min-height: 0;
 	width: 100%;
 	padding: 10px;
 	box-sizing: border-box
@@ -146,6 +151,28 @@ html {
 
 #projectTable {
 	border: 1px solid black;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse
+}
+
+#projectTable thead,
+#projectTable tbody {
+	display: block;
+	width: 100%
+}
+
+#projectTable tbody {
+	max-height: 320px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch
+}
+
+#projectTable thead tr,
+#projectTable tbody tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed
 }
 
 #projectTable tr {
@@ -308,7 +335,7 @@ html {
 	transition: width .3s, right .3s, background-color .3s
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
 	.cover-heading {
 		font-size: 32px
 	}
@@ -343,33 +370,43 @@ html {
 	.site-wrapper-inner {
 		position: static !important;
 		height: auto !important;
-		min-height: 100% !important
+		min-height: 0 !important;
+		flex: 1 1 auto;
+		display: flex !important;
+		flex-direction: column !important
+	}
+
+	.mySlide {
+		height: 100% !important;
+		overflow: hidden !important
 	}
 
 	.TopBar {
 		position: static !important;
 		height: auto !important;
+		flex: 0 0 auto;
 		padding-bottom: 8px;
 		overflow: hidden
 	}
 
-	.mySlide {
-		height: auto !important;
-		overflow: visible !important
-	}
-
 	.mySlide .slides {
-		position: static !important;
+		position: relative !important;
+		flex: 1 1 auto;
 		top: auto !important;
 		bottom: auto !important;
 		left: auto !important;
 		right: auto !important;
-		margin: 0 auto 60px !important;
-		width: 100% !important
+		margin: 0 !important;
+		width: 100% !important;
+		overflow: hidden
 	}
 
 	.mySlide .slides>section.present {
-		position: static !important;
+		position: absolute !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
 		-webkit-transform: none !important;
 		transform: none !important
 	}
@@ -430,6 +467,7 @@ html {
 	.TopBar {
 		position: static !important;
 		height: auto !important;
+		flex: 0 0 auto;
 		padding-bottom: 8px;
 		overflow: hidden
 	}
@@ -437,28 +475,37 @@ html {
 	.site-wrapper-inner {
 		position: static !important;
 		height: auto !important;
-		min-height: 100% !important
+		min-height: 0 !important;
+		flex: 1 1 auto;
+		display: flex !important;
+		flex-direction: column !important
+	}
+
+	.mySlide {
+		height: 100% !important;
+		overflow: hidden !important
 	}
 
 	.mySlide .slides {
-		position: static !important;
+		position: relative !important;
+		flex: 1 1 auto;
 		top: auto !important;
 		bottom: auto !important;
 		left: auto !important;
 		right: auto !important;
-		margin: 0 auto 60px !important;
-		width: 100% !important
+		margin: 0 !important;
+		width: 100% !important;
+		overflow: hidden
 	}
 
 	.mySlide .slides>section.present {
-		position: static !important;
+		position: absolute !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
 		-webkit-transform: none !important;
 		transform: none !important
-	}
-
-	.mySlide {
-		height: auto !important;
-		overflow: visible !important
 	}
 }
 
@@ -476,13 +523,70 @@ strong {
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
 	-ms-touch-action: none;
 	touch-action: none
 }
 
 .mySlide .slides {
 	position: absolute; 
-	top:90px;bottom:40px;right:0;left:0;margin:auto auto 60px;overflow:visible;
+	top:90px;bottom:70px;right:0;left:0;margin:auto auto 60px;overflow:visible;
 	width:960px;z-index:1;-webkit-perspective:600px;perspective:600px;-webkit-perspective-origin:60% 40%;perspective-origin:60% 40%}
 
 .mySlide .slides>section{-ms-perspective:600px;display:none;position:absolute;width:100%;padding:20px 0;z-index:10;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transition:-webkit-transform-origin .8s cubic-bezier(.26,.86,.44,.985),-webkit-transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985);transition:transform-origin .8s cubic-bezier(.26,.86,.44,.985),transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985)}.mySlide.center,.mySlide.center .slides,.mySlide.center .slides section{min-height:0}.mySlide .slides>section.future,.mySlide .slides>section.past{opacity:0;pointer-events:none}.mySlide .slides>section[data-transition=convex].past{-webkit-transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0);transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.mySlide .slides>section[data-transition=convex].future{-webkit-transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0);transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}
+
+.mySlide .slides>section.present {
+	overflow-y: auto !important;
+	-webkit-overflow-scrolling: touch
+}
+
+.mySlide .slides>section.present:has(.Projects) {
+	overflow: hidden !important;
+	display: flex !important;
+	flex-direction: column
+}
+
+.mySlide .slides>section.present .Projects {
+	flex: 1 1 auto;
+	min-height: 0
+}
+
+.mySlide .slides>section.present .CV {
+	max-height: 100%;
+	padding-bottom: 30px;
+	box-sizing: border-box
+}
+
+.mySlide .slides>section.present .Projects {
+	max-height: 100%;
+	box-sizing: border-box
+}
+
+.mySlide .slides>section.present .CV {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch
+}
+
+.mySlide .slides>section.present .Projects {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column
+}
+
+.mySlide .slides>section.present .Projects #projectTable {
+	display: flex !important;
+	flex-direction: column;
+	flex: 1 1 auto;
+	min-height: 0
+}
+
+.mySlide .slides>section.present .Projects #projectTable thead {
+	flex: 0 0 auto
+}
+
+.mySlide .slides>section.present .Projects #projectTable tbody {
+	flex: 1 1 auto;
+	min-height: 0;
+	max-height: none !important
+}
