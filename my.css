@@ -397,6 +397,7 @@ html {
 		left: auto !important;
 		right: auto !important;
 		margin: 0 !important;
+		margin-bottom: 20px !important;
 		width: 100% !important;
 		overflow: hidden
 	}
@@ -494,6 +495,7 @@ html {
 		left: auto !important;
 		right: auto !important;
 		margin: 0 !important;
+		margin-bottom: 20px !important;
 		width: 100% !important;
 		overflow: hidden
 	}
