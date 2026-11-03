@@ -31,6 +31,8 @@ html {
 	height: 100%;
 	background: url(back.jpg) center no-repeat fixed;
 	margin: 0;
+	padding: 10px;
+	box-sizing: border-box;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -66,7 +68,7 @@ html {
 
 .site-wrapper-inner {
 	vertical-align: top;
-	margin: 30px;
+	
 	position: absolute;
 	height: 100%;
 	width: 100%
@@ -316,4 +318,8 @@ strong {
 }
 
 .mySlide .slides {
-	position: absolute; //width:100%;top:90px;bottom:40px;right:0;left:0;margin:auto auto 60px;overflow:visible;//position:absolute;width:960px;z-index:1;-webkit-perspective:600px;perspective:600px;-webkit-perspective-origin:60% 40%;perspective-origin:60% 40%}.mySlide .slides>section{-ms-perspective:600px;display:none;position:absolute;width:100%;padding:20px 0;z-index:10;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transition:-webkit-transform-origin .8s cubic-bezier(.26,.86,.44,.985),-webkit-transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985);transition:transform-origin .8s cubic-bezier(.26,.86,.44,.985),transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985)}.mySlide.center,.mySlide.center .slides,.mySlide.center .slides section{min-height:0}.mySlide .slides>section.future,.mySlide .slides>section.past{opacity:0;pointer-events:none}.mySlide .slides>section[data-transition=convex].past{-webkit-transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0);transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.mySlide .slides>section[data-transition=convex].future{-webkit-transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0);transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}
+	position: absolute; 
+	top:90px;bottom:40px;right:0;left:0;margin:auto auto 60px;overflow:visible;
+	width:960px;z-index:1;-webkit-perspective:600px;perspective:600px;-webkit-perspective-origin:60% 40%;perspective-origin:60% 40%}
+
+.mySlide .slides>section{-ms-perspective:600px;display:none;position:absolute;width:100%;padding:20px 0;z-index:10;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;-webkit-transition:-webkit-transform-origin .8s cubic-bezier(.26,.86,.44,.985),-webkit-transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985);transition:transform-origin .8s cubic-bezier(.26,.86,.44,.985),transform .8s cubic-bezier(.26,.86,.44,.985),visibility .8s cubic-bezier(.26,.86,.44,.985),opacity .8s cubic-bezier(.26,.86,.44,.985)}.mySlide.center,.mySlide.center .slides,.mySlide.center .slides section{min-height:0}.mySlide .slides>section.future,.mySlide .slides>section.past{opacity:0;pointer-events:none}.mySlide .slides>section[data-transition=convex].past{-webkit-transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0);transform:translate3d(-100%,0,0) rotateY(-90deg) translate3d(-100%,0,0)}.mySlide .slides>section[data-transition=convex].future{-webkit-transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0);transform:translate3d(100%,0,0) rotateY(90deg) translate3d(100%,0,0)}
