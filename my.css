@@ -29,10 +29,12 @@ html {
 body,
 html {
 	height: 100%;
+	width: 100%;
 	background: url(back.jpg) center no-repeat fixed;
 	margin: 0;
 	padding: 10px;
 	box-sizing: border-box;
+	overflow-x: hidden;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -56,7 +58,7 @@ html {
 }
 
 .footer {
-	height: 80px;
+	height: 30px;
 	bottom: 0
 }
 
@@ -297,6 +299,143 @@ html {
 	-moz-transition: width .3s, right .3s, background-color .3s;
 	-o-transition: width .3s, right .3s, background-color .3s;
 	transition: width .3s, right .3s, background-color .3s
+}
+
+@media (max-width: 768px) {
+	.cover-heading {
+		font-size: 32px
+	}
+
+	.cover-subheading,
+	.masthead-brand {
+		font-size: 22px
+	}
+
+	.BGT {
+		margin: 0 1em;
+		padding: 0 1em
+	}
+
+	.masthead-nav-new {
+		margin-right: 10px
+	}
+
+	.masthead-nav-new>li>a {
+		font-size: 13px;
+		padding: .3em 0
+	}
+
+	.site-wrapper,
+	.site-wrapper-inner {
+		position: static !important;
+		height: auto !important
+	}
+
+	.TopBar {
+		position: static !important;
+		height: auto !important;
+		padding-bottom: 8px;
+		overflow: hidden
+	}
+
+	.mySlide {
+		height: auto !important;
+		overflow: visible !important
+	}
+
+	.mySlide .slides {
+		position: static !important;
+		top: auto !important;
+		bottom: auto !important;
+		left: auto !important;
+		right: auto !important;
+		margin: 0 auto 60px !important;
+		width: 100% !important
+	}
+
+	.mySlide .slides>section.present {
+		position: static !important;
+		-webkit-transform: none !important;
+		transform: none !important
+	}
+}
+
+@media (max-width: 480px) {
+	.cover-heading {
+		font-size: 22px
+	}
+
+	.cover-subheading,
+	.masthead-brand {
+		font-size: 16px
+	}
+
+	.BGT {
+		margin: 0 .5em;
+		padding: 0 .5em
+	}
+
+	.masthead-nav-new {
+		float: none;
+		margin-right: 0;
+		text-align: center
+	}
+
+	.masthead-brand {
+		float: none;
+		text-align: left;
+		display: block
+	}
+
+	.masthead-nav-new>li {
+		display: block
+	}
+
+	.masthead-nav-new>li>a {
+		position: static;
+		display: block;
+		width: 100% !important;
+		font-size: 14px
+	}
+
+	.masthead-nav-new>li:last-child a {
+		min-width: 0 !important;
+		max-width: 100% !important
+	}
+
+	.TopBar {
+		position: static !important;
+		height: auto !important;
+		padding-bottom: 8px;
+		overflow: hidden
+	}
+
+	.site-wrapper,
+	.site-wrapper-inner {
+		position: static !important;
+		height: auto !important
+	}
+
+	.mySlide .slides {
+		position: static !important;
+		top: auto !important;
+		bottom: auto !important;
+		left: auto !important;
+		right: auto !important;
+		margin: 0 auto 60px !important;
+		width: 100% !important
+	}
+
+	.mySlide .slides>section.present {
+		position: static !important;
+		-webkit-transform: none !important;
+		transform: none !important
+	}
+
+	.mySlide {
+		height: auto !important;
+		overflow: visible !important
+	}
 }
 
 b,
