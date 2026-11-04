@@ -53,8 +53,20 @@ var SLIDES_SELECTOR = '.slides section',
 		dom = {},
 
 		// Features supported by the browser, see #checkCapabilities()
-		features = {}
-		
+		features = {},
+
+		// Set by keyboard/touch navigation just before triggering a hash
+		// change, so that readURL() can pass the intended direction of
+		// travel ('next'/'prev') through to slide(). Left undefined for
+		// direct menu clicks so that existing index-based behavior applies.
+		pendingDirection,
+
+		// When true, the forced wrap-around transition direction is
+		// visually flipped (left/right swapped). Used so touch swipes can
+		// feel more natural than keyboard arrows without changing which
+		// slide becomes active.
+		pendingInvertVisual
+
 
 	/**
 	 * Starts up the presentation if the client is capable.
@@ -403,7 +415,7 @@ var SLIDES_SELECTOR = '.slides section',
 	 * @param {int} h Horizontal index of the target slide
 	
 	 */
-	function slide( h ) {
+	function slide( h, direction, invertVisual ) {
 
 		// Remember where we were at before
 		previousSlide = currentSlide;
@@ -418,10 +430,34 @@ var SLIDES_SELECTOR = '.slides section',
 		state.length = 0;
 
 		var indexhBefore = indexh || 0;
+		var targetIndex = Math.max( Math.min( h === undefined ? indexhBefore : h, horizontalSlides.length - 1 ), 0 );
+
+		// Determine the direction plain index comparison would naturally
+		// produce. The forced-direction override is only needed when the
+		// requested direction disagrees with this (i.e. wrap-around from
+		// the last slide to the first, or vice versa) - for normal adjacent
+		// moves the existing index-based logic already animates correctly,
+		// so we avoid overriding it to prevent inconsistent behavior.
+		var naturalDirection = targetIndex > indexhBefore ? 'next' : ( targetIndex < indexhBefore ? 'prev' : undefined );
+		// Force the explicit-direction path whenever the requested direction
+		// disagrees with plain index order (wrap-around), or whenever a
+		// visual inversion was requested (touch swipes) - in that case we
+		// need the forced path even for adjacent moves so the inversion
+		// below actually has an effect.
+		var effectiveDirection = ( direction && ( direction !== naturalDirection || invertVisual ) ) ? direction : undefined;
+
+		// When the effective direction is being forced, optionally flip
+		// which side the slide enters/exits from. Used so touch swipes can
+		// feel more natural (content pulled in from the opposite side)
+		// without changing which slide actually becomes active.
+		var visualDirection = effectiveDirection;
+		if( effectiveDirection && invertVisual ) {
+			visualDirection = effectiveDirection === 'next' ? 'prev' : 'next';
+		}
 
 		// Activate and transition to the new slide
-		indexh = updateSlides( HORIZONTAL_SLIDES_SELECTOR, h === undefined ? indexh : h );
-	
+		indexh = updateSlides( HORIZONTAL_SLIDES_SELECTOR, targetIndex, visualDirection, indexhBefore );
+
 		// Update the visibility of slides now that the indices have changed
 		updateSlidesVisibility();
 
@@ -515,7 +551,7 @@ var SLIDES_SELECTOR = '.slides section',
 	 * might differ from the passed in index if it was out of
 	 * bounds.
 	 */
-	function updateSlides( selector, index ) {
+	function updateSlides( selector, index, direction, previousIndex ) {
 
 		// Select all slides and convert the NodeList result to
 		// an array
@@ -542,7 +578,22 @@ var SLIDES_SELECTOR = '.slides section',
 					element.classList.add( 'stack' );
 				}
 
-				if( i < index ) {
+				if( i === index ) {
+					continue;
+				}
+
+				if( direction && i === previousIndex ) {
+					// When a direction was explicitly requested (keyboard or
+					// touch navigation) the slide we are leaving is placed on
+					// the side opposite to where the entering slide starts
+					// from, so that wrapping from the last slide to the
+					// first (or vice versa) animates in the requested
+					// direction instead of being based purely on index
+					// order. 'next' exits to the right (future), 'prev'
+					// exits to the left (past).
+					element.classList.add( direction === 'next' ? 'future' : 'past' );
+				}
+				else if( i < index ) {
 					// Any element previous to index is given the 'past' class
 					element.classList.add(  'future'  );
 				}
@@ -552,8 +603,66 @@ var SLIDES_SELECTOR = '.slides section',
 				}
 			}
 
-			// Mark the current slide as present
-			slides[index].classList.add( 'present' );
+
+			// When an explicit direction is supplied (used by keyboard and
+			// touch navigation) force the target slide to start from the
+			// side it should enter from, then flush that style in a
+			// separate animation frame before switching to 'present' so the
+			// browser animates the transition from the correct side. This
+			// keeps rotation consistent even when wrapping from the last
+			// slide to the first (or vice versa), which would otherwise
+			// appear to spin the wrong way based on plain index comparison.
+			if( direction ) {
+				var enteringSlide = slides[index];
+				// Per the CSS source (.past = translate3d(-100%...), i.e.
+				// left side; .future = translate3d(100%...), i.e. right
+				// side): 'next' enters from the left (past), 'prev' enters
+				// from the right (future).
+				var startClass = direction === 'next' ? 'past' : 'future';
+
+				// The slide is still display:none / hidden at this point
+				// (normally toggled on later by updateSlidesVisibility), so
+				// make it visible now or the forced starting position below
+				// would never actually be rendered/animated from.
+				enteringSlide.removeAttribute( 'hidden' );
+				enteringSlide.removeAttribute( 'aria-hidden' );
+				enteringSlide.style.display = 'block';
+
+				// Temporarily disable the CSS transition while we set the
+				// starting position, otherwise the browser would itself
+				// animate into the forced starting class (since 'transform'
+				// is always transitioned), corrupting the timing of the
+				// actual transition into 'present'.
+				enteringSlide.style.transition = 'none';
+				enteringSlide.classList.add( startClass );
+				// Force a synchronous layout so the browser commits the
+				// starting position as the "before" state of the upcoming
+				// transition.
+				void enteringSlide.offsetWidth;
+
+				// Wait for two animation frames before swapping to 'present'.
+				// A single synchronous class swap gets coalesced by the
+				// browser into one style recalculation (no transition would
+				// play); waiting for the next two painted frames guarantees
+				// the starting position above is committed first.
+				requestAnimationFrame( function() {
+					// Re-enable the transition before restoring 'present' so
+					// the browser actually animates from the forced starting
+					// position.
+					enteringSlide.style.transition = '';
+					void enteringSlide.offsetWidth;
+
+					requestAnimationFrame( function() {
+						enteringSlide.classList.remove( startClass );
+						enteringSlide.classList.add( 'present' );
+					} );
+				} );
+			}
+			else {
+				// Mark the current slide as present
+				slides[index].classList.add( 'present' );
+			}
+
 			slides[index].removeAttribute( 'hidden' );
 			slides[index].removeAttribute( 'aria-hidden' );
 
@@ -645,6 +754,13 @@ var SLIDES_SELECTOR = '.slides section',
 		var bits = hash.slice( 2 ).split( '/' ),
 			name = hash.replace( /#|\//gi, '' );
 
+		// Consume the pending direction (if any) so it only applies to this
+		// single navigation and doesn't leak into subsequent menu clicks
+		var direction = pendingDirection;
+		var invertVisual = pendingInvertVisual;
+		pendingDirection = undefined;
+		pendingInvertVisual = undefined;
+
 		// If the first bit is invalid and there is a name we can
 		// assume that this is a named link
 		if( isNaN( parseInt( bits[0], 10 ) ) && name.length ) {
@@ -659,7 +775,7 @@ var SLIDES_SELECTOR = '.slides section',
 			if( element ) {
 				// Find the position of the named slide and navigate to it
 				var indices = mySlide.getIndices( element );
-				slide( indices.h );
+				slide( indices.h, direction, invertVisual );
 			}
 			// If the slide doesn't exist, navigate to the current slide
 			else {
@@ -671,7 +787,7 @@ var SLIDES_SELECTOR = '.slides section',
 			var h = parseInt( bits[0], 10 ) || 0;
 
 			if( h !== indexh ) {
-				slide( h );
+				slide( h, direction, invertVisual );
 			}
 		}
 	}
@@ -776,6 +892,16 @@ var SLIDES_SELECTOR = '.slides section',
 		// Returns the indices of the current, or specified, slide
 		getIndices: getIndices,
 
+		// Sets the direction ('next'/'prev') that the upcoming hash-driven
+		// navigation should animate towards. Used by keyboard and touch
+		// handlers before simulating a menu link click. Pass invertVisual
+		// as true to flip which side the slide enters/exits from (used by
+		// touch swipes to feel more natural than keyboard arrows).
+		setPendingDirection: function( direction, invertVisual ) {
+			pendingDirection = direction;
+			pendingInvertVisual = !!invertVisual;
+		},
+
 		// Forward event binding to the mySlide DOM element
 		addEventListener: function( type, listener, useCapture ) {
 			if( 'addEventListener' in window ) {
@@ -843,6 +969,7 @@ var SLIDES_SELECTOR = '.slides section',
 				//console.log('id='+currntID+"/"+nbID);
 				//window.location.href ="#/sec"+currntID;
 				//selectMenu('Menu_sec'+currntID);
+				mySlide.setPendingDirection('prev');
 				document.getElementById('Menu_sec'+currntID+'_link').click();
 				//document.getElementById('touchsurface').focus();
 				//document.getElementById('Menu_sec'+currntID+'_link').classList.add("masthead-nav-new");
@@ -856,6 +983,7 @@ var SLIDES_SELECTOR = '.slides section',
 				//console.log('id='+currntID+"/"+nbID);
 				//window.location.href ="#/sec"+currntID;
 				//selectMenu('Menu_sec'+currntID);
+				mySlide.setPendingDirection('next');
 				document.getElementById('Menu_sec'+currntID+'_link').click();
 				//document.getElementById('touchsurface').focus();
 				//document.getElementById('Menu_sec'+currntID+'_link').classList.add("masthead-nav-new");
@@ -901,20 +1029,22 @@ var SLIDES_SELECTOR = '.slides section',
 				if(dist<0)
 				{
 					//console.log('Swift Left');
-					currntID--;
-					if(currntID<1)
-						currntID=nbID;
+					currntID++;
+					if(currntID>nbID)
+						currntID=1;
 					//console.log('id='+currntID+"/"+nbID);
+					mySlide.setPendingDirection('next', true);
 					window.location.href ="#/sec"+currntID;
 					selectMenu('Menu_sec'+currntID);
 				}
 				if(dist>0)
 				{
 					//console.log('swift Right');
-					currntID++;
-					if(currntID>nbID)
-						currntID=1;
+					currntID--;
+					if(currntID<1)
+						currntID=nbID;
 					//console.log('id='+currntID+"/"+nbID);
+					mySlide.setPendingDirection('prev', true);
 					window.location.href ="#/sec"+currntID;
 					selectMenu('Menu_sec'+currntID);
 				}
