@@ -119,6 +119,34 @@ html {
 	border-collapse: separate
 }
 
+.CV_Flex {
+	display: flex;
+	width: 100%;
+	align-items: flex-start;
+}
+
+.CV_Col {
+	flex: 1 1 0;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+.CV_Flex .CV_Bleu {
+	flex: 0 0 200px;
+	padding: 0.4cm;
+}
+
+@media (max-width: 768px) {
+	.CV_Flex {
+		flex-direction: column;
+	}
+
+	.CV_Flex .CV_Bleu {
+		flex: 1 1 auto;
+		width: 100% !important;
+	}
+}
+
 .CV_col2 {
 	text-align: left
 }
@@ -144,9 +172,10 @@ html {
 	font-size: 30px
 }
 
-.CV_Table .CV_Bleu {
+.CV_Table .CV_Bleu,
+.CV_Flex .CV_Bleu {
 	background-color: rgba(153, 204, 255, .75);
-	width: 166px
+	width: 200px
 }
 
 #projectTable {
