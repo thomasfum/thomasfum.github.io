@@ -5,44 +5,25 @@
  *
  * Copyright (C) 2016 Hakim El Hattab, http://hakim.se
  */
- 
- 
- 
- 
-(function( root, factory ) {
-	if( typeof define === 'function' && define.amd ) {
-		// AMD. Register as an anonymous module.
-		define( function() {
-			root.mySlide = factory();
-			return root.mySlide;
-		} );
-	} else if( typeof exports === 'object' ) {
-		// Node. Does not work with strict CommonJS.
-		module.exports = factory();
-	} else {
-		// Browser globals.
-		root.mySlide = factory();
-	}
-}( this, function() {
 
-	'use strict';
+'use strict';
 
-	var mySlide;
+var mySlide;
 
-	// The mySlide.js version
-	var VERSION = '3.3.0';
+// The mySlide.js version
+var VERSION = '3.3.0';
 
-	var SLIDES_SELECTOR = '.slides section',
-		HORIZONTAL_SLIDES_SELECTOR = '.slides>section',
-		HOME_SLIDE_SELECTOR = '.slides>section:first-of-type',
-		UA = navigator.userAgent,
+var SLIDES_SELECTOR = '.slides section',
+	HORIZONTAL_SLIDES_SELECTOR = '.slides>section',
+	HOME_SLIDE_SELECTOR = '.slides>section:first-of-type',
+	UA = navigator.userAgent,
 
-		// Configuration defaults, can be overridden at initialization time
-		config = {
+	// Configuration defaults, can be overridden at initialization time
+	config = {
 
-		
-			// Transition style
-			transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+		// Transition style
+		transition: 'convex', // none/fade/slide/convex/concave/zoom
 
 
 			// Number of slides away from the current that are visible
@@ -810,14 +791,11 @@
 	
 	};
 
-	return mySlide;
+	//------------------------------------------------------//
 
-}));
-//------------------------------------------------------//
-
-//id is Menu_sec2
-function selectMenu(id)
-{
+	//id is Menu_sec2
+	function selectMenu(id)
+	{
 		//console.log('var id='+id);
 		var a = document.getElementById('Menu').getElementsByTagName('li');
 		for(var j = 0; j < a.length-1; j++){
