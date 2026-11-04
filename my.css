@@ -95,6 +95,10 @@ html {
 	height: inherit
 }
 
+.CV_Col > :last-child {
+	margin-bottom: 0;
+}
+
 
 .BG {
 	background-color: rgba(55, 55, 55, .75);
@@ -122,7 +126,7 @@ html {
 .CV_Flex {
 	display: flex;
 	width: 100%;
-	align-items: flex-start;
+	align-items: stretch;
 }
 
 .CV_Col {
@@ -134,6 +138,10 @@ html {
 .CV_Flex .CV_Bleu {
 	flex: 0 0 200px;
 	padding: 0.4cm;
+}
+
+.CV_Flex .CV_Col:not(.CV_Bleu) {
+	padding-bottom: 15px;
 }
 
 @media (max-width: 768px) {
@@ -742,7 +750,6 @@ strong {
 
 .mySlide .slides>section.present .CV {
 	max-height: 100%;
-	padding-bottom: 30px;
 	box-sizing: border-box
 }
 
